@@ -33,7 +33,9 @@ public class StudentService {
     }
 
     public Teacher getTeacherByName(String name) {
-        return studentrepository.getTeacherByName(name);
+        Optional<Teacher> t = studentrepository.getTeacherByName(name);
+        if(t.isPresent()) return t.get();
+        return null;
     }
 
     public List<String> getStudentByTeacherName(String teacher) {

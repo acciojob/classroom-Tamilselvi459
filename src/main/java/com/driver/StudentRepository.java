@@ -51,9 +51,11 @@ public class StudentRepository {
           return student;
         }
 
-    public Teacher getTeacherByName(String name) {
-        Teacher teacher = teachermap.get(name);
-        return teacher;
+    public Optional<Teacher> getTeacherByName(String name) {
+        if(teachermap.containsKey(name))
+        return Optional.of(teachermap.get(name));
+
+        return Optional.empty();
     }
 
     public List<String> getStudentByTeacherName(String teacher) {
