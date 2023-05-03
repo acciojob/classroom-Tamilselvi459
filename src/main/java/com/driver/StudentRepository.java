@@ -78,7 +78,7 @@ public class StudentRepository {
         List<String> ans = getStudentByTeacherName(teacher);
         for(String name : ans){
             pairmap.remove(name);
-            studentmap.remove(name);
+            if(studentmap.containsKey(name)) studentmap.remove(name);
         }
     }
     public List<String> getAllTeacher(){
@@ -94,7 +94,7 @@ public class StudentRepository {
         List<String> ans = getAllStudents();
         for(String name : ans) {
             studentmap.remove(name);
-            pairmap.remove(name);
+            if(pairmap.containsKey(name)) pairmap.remove(name);
         }
         List<String> teacher = getAllTeacher();
         for(String name : teacher) teachermap.remove(name);
