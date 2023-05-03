@@ -66,7 +66,11 @@ public class StudentRepository {
     }
 
     public List<String> getAllStudents() {
-        return new ArrayList<>(studentmap.keySet());
+        List<String> ans = new ArrayList<>();
+        for(String name : studentmap.keySet()){
+            ans.add(name);
+        }
+        return ans;
     }
 
     public void deleteTeacherByName(String teacher) {
@@ -74,10 +78,15 @@ public class StudentRepository {
         List<String> ans = getStudentByTeacherName(teacher);
         for(String name : ans){
             pairmap.remove(name);
+            studentmap.remove(name);
         }
     }
     public List<String> getAllTeacher(){
-        return new ArrayList<>( teachermap.keySet());
+       List<String> ans = new ArrayList<>();
+       for(String name : teachermap.keySet()){
+           ans.add(name);
+       }
+       return ans;
     }
 
 
