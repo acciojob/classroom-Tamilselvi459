@@ -25,23 +25,23 @@ public class StudentRepository {
         teachermap.put(teacher.getName() , teacher);
     }
 
-    public Optional<Student> getStudent(String student) {
-        if(studentmap.containsKey(student)){
+//    public Optional<Student> getStudent(String student) {
+//        if(studentmap.containsKey(student)){
+//
+//            return Optional.of(studentmap.get(student));
+//        }
+//        return Optional.empty();
+//
+//    }
 
-            return Optional.of(studentmap.get(student));
-        }
-        return Optional.empty();
+//    public Optional<Teacher> getTeacher(String teacher) {
+//        if(teachermap.containsKey(teacher)){
+//            return Optional.of(teachermap.get(teacher));
+//        }
+//        return Optional.empty();
+//    }
 
-    }
-
-    public Optional<Teacher> getTeacher(String teacher) {
-        if(teachermap.containsKey(teacher)){
-            return Optional.of(teachermap.get(teacher));
-        }
-        return Optional.empty();
-    }
-
-    public void addstudentTeacherPair(String student, String teacher) {
+    public void addStudentTeacherPair(String student, String teacher) {
 
         pairmap.put(student , teacher);
     }

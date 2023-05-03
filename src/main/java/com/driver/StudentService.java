@@ -21,11 +21,8 @@ public class StudentService {
     }
 
     public void addStudentTeacherPair(String student, String teacher) {
-        Optional<Student> a = studentrepository.getStudent(student);
-        Optional<Teacher> t = studentrepository.getTeacher(teacher);
-        if(a.isPresent() && t.isPresent()) {
-            studentrepository.addstudentTeacherPair(student,teacher);
-        }
+        studentrepository.addStudentTeacherPair(student,teacher);
+
     }
 
     public Student getStudentByName(String name) {
