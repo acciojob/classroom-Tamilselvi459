@@ -12,7 +12,7 @@ public class StudentRepository {
     HashMap<String , Student> studentmap = new HashMap<>();
     HashMap<String , Teacher> teachermap = new HashMap<>();
 
-    HashMap<String , String > pairmap = new HashMap<>();
+    HashMap<String , List<String> > pairmap = new HashMap<>();
    // HashMap<String , List<>>
 
     public void addStudent(Student student) {
@@ -25,25 +25,14 @@ public class StudentRepository {
         teachermap.put(teacher.getName() , teacher);
     }
 
-//    public Optional<Student> getStudent(String student) {
-//        if(studentmap.containsKey(student)){
-//
-//            return Optional.of(studentmap.get(student));
-//        }
-//        return Optional.empty();
-//
-//    }
 
-//    public Optional<Teacher> getTeacher(String teacher) {
-//        if(teachermap.containsKey(teacher)){
-//            return Optional.of(teachermap.get(teacher));
-//        }
-//        return Optional.empty();
-//    }
 
     public void addStudentTeacherPair(String student, String teacher) {
 
-        pairmap.put(student , teacher);
+        List<String> ans = new ArrayList<>();
+        if(pairmap.containsKey(teacher)) ans = pairmap.get(teacher);
+        ans.add(student);
+        pairmap.put(teacher , ans);
     }
 
     public Student getStudentByName(String name) {
@@ -58,11 +47,7 @@ public class StudentRepository {
     }
 
     public List<String> getStudentByTeacherName(String teacher) {
-        List<String> ans = new ArrayList<>();
-        for(String name : pairmap.keySet()){
-            if(pairmap.get(name).equals(teacher)) ans.add(name);
-        }
-        return ans;
+       return pairmap.get(teacher);
     }
 
     public List<String> getAllStudents() {
@@ -74,29 +59,23 @@ public class StudentRepository {
     }
 
     public void deleteTeacherByName(String teacher) {
-        teachermap.remove(teacher);
-        List<String> ans = getStudentByTeacherName(teacher);
-        for(String name : ans){
-            pairmap.remove(name);
-            if(studentmap.containsKey(name)) studentmap.remove(name);
+
+        for(String a : pairmap.get(teacher)){
+            studentmap.remove(a);
         }
+        teachermap.remove(teacher);
+        pairmap.remove(teacher);
     }
-    public List<String> getAllTeacher(){
-       List<String> ans = new ArrayList<>();
-       for(String name : teachermap.keySet()){
-           ans.add(name);
-       }
-       return ans;
-    }
+
 
 
     public void deleteAllTeacher() {
-        List<String> ans = getAllStudents();
-        for(String name : ans) {
-            studentmap.remove(name);
-            if(pairmap.containsKey(name)) pairmap.remove(name);
+        for(String a: teachermap.keySet()){
+            for(String an : pairmap.get(a)){
+                studentmap.remove(an);
+            }
+            teachermap.remove(a);
+            pairmap.remove(a);
         }
-        List<String> teacher = getAllTeacher();
-        for(String name : teacher) teachermap.remove(name);
     }
 }
